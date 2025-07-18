@@ -62,41 +62,54 @@ class SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF00B4DB), Color(0xFF0083B0)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+        decoration: _buildGradientBackground(),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildLogo(),
+              const SizedBox(height: 16),
+              _buildTagline(context),
+            ],
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ScaleTransition(
-              scale: _logoAnimation,
-              child: const Icon(
-                Icons.shopping_bag_rounded,
-                color: Colors.white,
-                size: 100,
-              ),
-            ),
-            const SizedBox(height: 24),
-            FadeTransition(
-              opacity: _textAnimation,
-              child: Text(
-                "Shop. Style. Smile.",
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5,
-                ),
-              ),
-            ),
-          ],
+      ),
+    );
+  }
+
+  BoxDecoration _buildGradientBackground() {
+    return const BoxDecoration(
+      gradient: LinearGradient(
+        colors: [Color(0xFF00B4DB), Color(0xFF0083B0)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+    );
+  }
+
+  Widget _buildLogo() {
+    return ScaleTransition(
+      scale: _logoAnimation,
+      child: const Icon(
+        Icons.shopping_bag_rounded,
+        color: Colors.white,
+        size: 80,
+      ),
+    );
+  }
+
+  Widget _buildTagline(BuildContext context) {
+    return FadeTransition(
+      opacity: _textAnimation,
+      child: Text(
+        ' "Shop. Style. Smile.',
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1.2,
         ),
       ),
     );
