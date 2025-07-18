@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/config/app_router.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,6 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'E_Commerce App',
+      initialRoute: AppRouter.splash,
+      onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }
 }
